@@ -141,6 +141,13 @@ d3.text("life.txt", function(error, life) {
       .on("click", function(d) {
         var tag = d.data.name;
         select(tag);
+
+       d3.selectAll('text')
+       .style('font-size', '14px');
+
+        d3.select(this)
+        .style('font-size', '24px')
+        .style('font-weight', 'bold');
       }
       );
 
@@ -239,7 +246,7 @@ d3.json("connections.json", function(error, graph) {
 
 
        var circles = node.append("circle")
-       .attr("r", d => d.strength*20)
+       .attr("r", d => Math.sqrt(d.strength)*20)
        .attr("fill",	d=> mycolor(d.sentiment))
        .call(d3.drag()
            .on("start", dragstarted)
@@ -249,7 +256,7 @@ d3.json("connections.json", function(error, graph) {
            d3.select(this)
            .transition()
            .duration(750)
-           .attr('r', d => d.strength*30);
+           .attr('r', d => Math.sqrt(d.strength)*30);
 
            d3.select(this.parentNode).selectAll('text')
            .transition()
@@ -261,7 +268,7 @@ d3.json("connections.json", function(error, graph) {
            d3.select(this)
            .transition()
            .duration(750)
-           .attr('r', d => d.strength*20);
+           .attr('r', d => Math.sqrt(d.strength)*20);
 
            d3.select(this.parentNode).selectAll('text')
            .transition()
@@ -338,3 +345,4 @@ function dragended(d) {
 
 </script>
 </html>
+
