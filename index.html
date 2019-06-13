@@ -145,6 +145,7 @@ d3.text("life.txt", function(error, life) {
        d3.selectAll('text')
        .transition()
        .duration(500)
+       .style('font-weight', 'normal')
        .style('font-size', '14px');
 
         d3.select(this)
