@@ -145,14 +145,14 @@ d3.text("life.txt", function(error, life) {
        d3.selectAll('text')
        .transition()
        .duration(500)
-       .style('font-weight', 'normal')
-       .style('font-size', '14px');
+       .style('font-size', '14px')
+       .style('font-weight', 'normal');
 
         d3.select(this)
+        .style('font-weight', 'bold')
         .transition()
         .duration(500)
-        .style('font-size', '24px')
-        .style('font-weight', 'bold');
+        .style('font-size', '24px');
       }
       );
 
