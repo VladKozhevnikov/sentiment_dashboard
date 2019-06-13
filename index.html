@@ -47,9 +47,9 @@ body {
 
 
 </style>
-<label id="show-length">
+<!-- <label id="show-length">
   <input type="checkbox"> Show branch length
-</label>
+</label>  -->
 
 
 <svg id="svg1"></svg>
@@ -102,19 +102,19 @@ d3.text("life.txt", function(error, life) {
 
   cluster(root);
 
-  var input = d3.select("#show-length input").on("change", changed),
-      timeout = setTimeout(function() { input.property("checked", true).each(changed); }, 2000);
+/*  var input = d3.select("#show-length input").on("change", changed),
+      timeout = setTimeout(function() { input.property("checked", true).each(changed); }, 2000); */
 
   setRadius(root, root.data.length = 0, innerRadius / maxLength(root));
 /*  setColor(root); */
 
-  var linkExtension = chart.append("g")
+/*  var linkExtension = chart.append("g")
       .attr("class", "link-extensions")
     .selectAll("path")
     .data(root.links().filter(function(d) { return !d.target.children; }))
     .enter().append("path")
       .each(function(d) { d.target.linkExtensionNode = this; })
-      .attr("d", linkExtensionConstant);
+      .attr("d", linkExtensionConstant); */
 
   var link = chart.append("g")
       .attr("class", "links")
@@ -233,10 +233,14 @@ d3.json("connections.json", function(error, graph) {
          .data(graph.nodes.filter(function(d){return d.group == group;}))
          .enter().append("g");
 
+      var mycolor = d3.scaleLinear()
+       .domain([-1, 0 ,1])
+       .range(['#dd3e54', '#d1ffdb','#6be585']);
+
 
        var circles = node.append("circle")
-       .attr("r", 3)
-       .attr("fill",	'#000')
+       .attr("r", d => d.strength*20)
+       .attr("fill",	d=> mycolor(d.sentiment))
        .call(d3.drag()
            .on("start", dragstarted)
            .on("drag", dragged)
@@ -245,7 +249,7 @@ d3.json("connections.json", function(error, graph) {
            d3.select(this)
            .transition()
            .duration(750)
-           .attr('r', 7);
+           .attr('r', d => d.strength*30);
 
            d3.select(this.parentNode).selectAll('text')
            .transition()
@@ -257,7 +261,7 @@ d3.json("connections.json", function(error, graph) {
            d3.select(this)
            .transition()
            .duration(750)
-           .attr('r', 3);
+           .attr('r', d => d.strength*20);
 
            d3.select(this.parentNode).selectAll('text')
            .transition()
@@ -270,10 +274,10 @@ d3.json("connections.json", function(error, graph) {
          }) ;
 
 
-        var titles = node.append("title")
+  /*      var titles = node.append("title")
           .text(function(d) {
             return d.id;
-          });
+          });  */
 
         var text = node.append("text")
           .style("text-anchor", "middle")
@@ -287,7 +291,7 @@ d3.json("connections.json", function(error, graph) {
       .nodes(graph.nodes.filter(function(d){return d.group == group;}))
       .on("tick", ticked);
 
-  simulation.alpha(1).restart();
+simulation.alpha(1).restart();
 
   simulation.force("link")
       .links(graph.links.filter(function(d){return d.group == group;}))
