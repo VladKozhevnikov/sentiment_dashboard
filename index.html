@@ -287,7 +287,7 @@ d3.json("connections.json", function(error, graph) {
       .nodes(graph.nodes.filter(function(d){return d.group == group;}))
       .on("tick", ticked);
 
-
+  simulation.alpha(1).restart();
 
   simulation.force("link")
       .links(graph.links.filter(function(d){return d.group == group;}))
