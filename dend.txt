@@ -1,0 +1,7 @@
+((winter,(snow, desert))'58-56',(((floor, water)'55-54',(military vehicle,(dark, forest)'52-51')'53-51')'55-51',
+(((dirt, rock)'50-49',(parking, truck)'48-47')'50-47',(indoor,(((nature,(mountain, red)'44-43')'45-43',(light, (orange ,(field ,outdoor)'40-39')'41-39')'42-39')'45-39',
+((old,(carX,(green,(blue, way)'34-35')'36-34')'37-34')'38-34',
+((automotive, ocean)'33-32',((transportX,(jeep , (control panel, dog)'29-28')'30-28')'31-28',
+(white, (building, ( roadX, (black , (
+(  (vehicle, car)'23-22'   ,   ( supercar,  (personX , (wheel , (drift, (street, (grass ,(transport, (city, (device, (road, (scene, (person, (bicycle, (driving, yellow))))))))))))'19-7'  )'20-7'   )'21-7'  )'23-7'   ,
+(sidewalk, (parked , ( (sky, ground)'4-3' , (tree , sunset)'2-1' )'4-1' )'5-1' )'6-1'   )'23-1' )'24-1' )'25-1')'26-1')'27-1')'31-1')'33-1')'38-1')'45-1')'46-1')'50-1')'55-1')
