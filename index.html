@@ -93,7 +93,7 @@ var chart = svg1.append("g")
 
 
 
-d3.text("dend.txt", function(error, life) {
+d3.text("dend_2.txt", function(error, life) {
   if (error) throw error;
 
   var root = d3.hierarchy(parseNewick(life), function(d) { return d.branchset; })
