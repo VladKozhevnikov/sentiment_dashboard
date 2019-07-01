@@ -223,7 +223,7 @@ function select(category) {
 
 d3.selectAll("#svg2").selectAll("*").remove();
 
-d3.json("connections.json", function(error, graph) {
+d3.json("../data/connections.json", function(error, graph) {
   if (error) throw error;
 
   var group = category;
@@ -244,13 +244,13 @@ d3.json("connections.json", function(error, graph) {
          .enter().append("g");
 
       var mycolor = d3.scaleLinear()
-       .domain([-1, 0 ,1])
-       .range(['#dd3e54', '#d1ffdb','#6be585']);
+       .domain([ 0 ,1])
+       .range(['#ffffff','#6be585']);
 
 
        var circles = node.append("circle")
-       .attr("r", d => Math.sqrt(d.strength)*20)
-       .attr("fill",	d=> mycolor(d.sentiment))
+       .attr("r", d => d.likes/8000)
+       .attr("fill",	'#00cdac')
        .call(d3.drag()
            .on("start", dragstarted)
            .on("drag", dragged)
@@ -259,25 +259,28 @@ d3.json("connections.json", function(error, graph) {
            d3.select(this)
            .transition()
            .duration(750)
-           .attr('r', d => Math.sqrt(d.strength)*30);
+           .attr('r', d => d.likes/4000);
 
            d3.select(this.parentNode).selectAll('text')
            .transition()
            .duration(750)
            .attr("y", 20)
-           .style('font-size', '14px');
+           .style('font-size', '14px')
+           .text(d => d.id + ': ' +Math.round(d.strength*100) + '%');
+
          })
        .on('mouseout', function() {
            d3.select(this)
            .transition()
            .duration(750)
-           .attr('r', d => Math.sqrt(d.strength)*20);
+           .attr('r', d => d.likes/8000);
 
            d3.select(this.parentNode).selectAll('text')
            .transition()
            .duration(750)
            .attr("y", 15)
-           .style('font-size', '10px');
+           .style('font-size', '10px')
+           .text(d => d.id);
 
 
 
@@ -293,9 +296,18 @@ d3.json("connections.json", function(error, graph) {
           .style("text-anchor", "middle")
           .style('font-size', '10px')
           .attr("y", 15)
-          .text(function(d) {
+          .html(function(d) {
             return d.id;
           });
+
+          var span = node.append("span")
+            .style("text-anchor", "middle")
+            .style('font-size', '14px')
+            .style('opacity', 0.5)
+            .attr("y", -15)
+            .text(function(d) {
+              return Math.round(d.strength*100) + '%';
+            });
 
   simulation
       .nodes(graph.nodes.filter(function(d){return d.group == group;}))
@@ -348,4 +360,3 @@ function dragended(d) {
 
 </script>
 </html>
-
