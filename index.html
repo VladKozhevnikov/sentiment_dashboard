@@ -223,7 +223,7 @@ function select(category) {
 
 d3.selectAll("#svg2").selectAll("*").remove();
 
-d3.json("../data/connections.json", function(error, graph) {
+d3.json("connections.json", function(error, graph) {
   if (error) throw error;
 
   var group = category;
